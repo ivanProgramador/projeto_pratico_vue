@@ -11,13 +11,27 @@
 
 
 <script>
-//import axios from 'axios';
+import axios from 'axios';
 
+//toda vez que o servidor é iniciado um objeto impleicito camado created e gerado 
+// por isso toda a lógica dde requisição ficara dentro dele
 
 export default {
   name: 'App',
-  components: {
-   
+  data(){
+     return {
+       pokemons:[]
+     }
+  },
+  created: function(){
+    axios.get('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0').then(res=>{
+
+      console.log(res.data.results);
+      this.pokemons = res.data.results;
+      console.log(this.pokemons);
+        
+    })
+     
   }
 }
 </script>
