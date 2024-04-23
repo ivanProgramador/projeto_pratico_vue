@@ -1,6 +1,11 @@
 <template>
 
   <div id="app">
+   <div v-for="(poke,index) in pokemons " :key="index" >
+     <PokemonComponent :name="poke.name" :url="poke.url" :num="index + 1" />
+     
+
+   </div>
    
   </div>
 </template>
@@ -12,6 +17,7 @@
 
 <script>
 import axios from 'axios';
+import PokemonComponent from './components/Pokemon-component.vue';
 
 //toda vez que o servidor é iniciado um objeto impleicito camado created e gerado 
 // por isso toda a lógica dde requisição ficara dentro dele
@@ -32,6 +38,9 @@ export default {
         
     })
      
+  },
+  components:{
+     PokemonComponent,
   }
 }
 </script>
