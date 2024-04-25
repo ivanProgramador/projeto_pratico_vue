@@ -1,9 +1,36 @@
 <template>
-    <div>
-        <h1>{{ num }} {{ upper(name) }}</h1>
-        <small>{{ url }}</small>
 
-    </div>
+    
+
+            <div class="card">
+                <div class="card-image">
+                    <figure >
+                    <img
+                        :src="pokemon.front"
+                        alt="Placeholder image"
+                    />
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                    <div class="media-center">
+                        
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-4">{{ num }} {{ upper(name) }}</p>
+                        <p class="subtitle is-6">{{ this.pokemon.type}}</p>
+                    </div>
+                    </div>
+
+                    <div class="content">
+                    
+                    
+                    
+                </div>
+                </div>
+            </div>
+
+   
   
 </template>
 
@@ -20,8 +47,23 @@ export default {
         })
     },
     data(){
+        /*  mesmo que eu faça a requisição e os dados 
+            sejam mostrados na tela 
+            eles so serão reativos as propriadades form definidas dentro desta função 
+            data porque quando eu reuisito na funçõ created ele traz e mostra porém para mudar 
+            caso um desses dados atualize eu teria de requisitar denovo,
+            já eu colocando eles dentro da funfção data ela detecta sozinha qualquer mudança que aconteça
+            nos dado da url e atualiza o componente  
+
+
+          
+        */
         return{
-            pokemon:{}
+            pokemon:{
+             type:'',
+             front:'',
+             back:''
+            }
         }
     },
     props:{
