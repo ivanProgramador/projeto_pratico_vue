@@ -6,7 +6,7 @@
                 <div class="card-image">
                     <figure >
                     <img
-                        :src="pokemon.front"
+                        :src="currentImg"
                         alt="Placeholder image"
                     />
                     </figure>
