@@ -2,10 +2,17 @@
 
   <div id="app">
     <div class="column  is-ffset-one-quarter" >
-      <div v-for="(poke,index) in pokemons " :key="index" >
-         <PokemonComponent :name="poke.name" :url="poke.url" :num="index + 1" />
-     
+      <hr>
+      <h4 class="is-size-4">Pokedex</h4>
 
+      <input type="text" placeholder="Busca pelo nome" v-model="busca" class="input is-rounded" >
+      <button class="button is-normal is-success" id="buscaBtn" @click="buscar">Busca</button>
+
+
+
+
+      <div v-for="(poke,index) in filteredPokemons " :key="poke.url" >
+         <PokemonComponent :name="poke.name" :url="poke.url" :num="index + 1" />
    </div>
 
     </div>
@@ -30,7 +37,9 @@ export default {
   name: 'App',
   data(){
      return {
-       pokemons:[]
+       pokemons:[],
+       filteredPokemons:[],
+       busca:''
      }
   },
   created: function(){
@@ -38,13 +47,38 @@ export default {
 
       console.log(res.data.results);
       this.pokemons = res.data.results;
-      console.log(this.pokemons);
+      this.filteredPokemons = res.data.results;
+    
         
     })
      
   },
   components:{
      PokemonComponent,
+  },
+  methods:{
+
+    buscar:function(){
+       
+        this.filteredPokemons = this.pokemons;
+        if(this.busca == '' || this.busca == ' '){
+            this.filteredPokemons = this.pokemons;
+        }else{
+             this.filteredPokemons = this.pokemons.filter(pokemon => pokemon.name == this.busca);
+        }
+    }
+
+  },
+  computed:{
+   /*  resultadoBusca: function(){
+        if(this.busca == '' || this.busca == ' '){
+            return this.pokemons;
+        }else{
+             return this.pokemons.filter(pokemon => pokemon.name == this.busca);
+        }
+     }
+    */
+     
   }
 }
 </script>
@@ -57,5 +91,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+#buscaBtn{
+    margin-top: 2%;
 }
 </style>
